@@ -9,15 +9,6 @@ $dark-grey: #282828;
   box-sizing: border-box;
 }
 
-/* .content__experiment {
-  opacity: 0;
-  transform: rotate(-20deg) scale(0.5);
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
- */
-
 body {
   padding-top: 5vh;
   font-family: 'Source Code Pro', monospace;
@@ -50,11 +41,16 @@ body {
   text-decoration: none;
   color: $dark-grey;
   display: inline-block;
-  margin-bottom: 10px;
 }
 
 $ira-height: 180px;
 $ira-width: 250px;
+
+// fade animation
+
+.ira-fade {
+  margin-bottom: 30px;
+}
 
 .ira-fade__holder {
   height: $ira-height;
@@ -72,6 +68,33 @@ $ira-width: 250px;
 }
 
 .ira-fade__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// unfold animation
+
+.ira-unfold {
+  margin-bottom: 30px;
+}
+
+.ira-unfold__holder {
+  height: $ira-height;
+  width: $ira-width;
+  position: fixed;
+  pointer-events: none;
+  display: none;
+  overflow: hidden;
+  width: 0;
+}
+
+.ira-unfold__image-wrap {
+  height: $ira-height;
+  width: $ira-width;
+}
+
+.ira-unfold__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
