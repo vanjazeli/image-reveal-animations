@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 
-$light-grey: #ccc0c0;
-$dark-grey: #282828;
+$dark-grey: #ccc0c0;
+$light-grey: #282828;
 
 * {
   margin: 0;
@@ -21,7 +21,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 80px;
 }
 
 .content__segment {
@@ -32,70 +33,58 @@ body {
 
 .content__heading {
   font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
   color: $dark-grey;
+}
+
+.content__links {
+  display: flex;
+  flex-direction: column;
+
+  > :not(:last-child){
+    margin-bottom: 22px;
+  }
 }
 
 .content__link {
   text-decoration: none;
   color: $dark-grey;
   display: inline-block;
+  padding-bottom: 6px;
+  background-image: linear-gradient($dark-grey 0 0);
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  transition:
+  background-size 0.3s,
+  background-position 0s 0.3s;
+
+  &:hover {
+    background-position: 100% 100%;
+    background-size: 100% 1px;
+  }
 }
 
-$ira-height: 180px;
-$ira-width: 250px;
+// used for ira
 
-// fade animation
-
-.ira-fade {
-  margin-bottom: 30px;
-}
-
-.ira-fade__holder {
-  height: $ira-height;
-  width: $ira-width;
+.reveal {
   position: fixed;
+  width: 220px;
+  height: 150px;
+  top: 0;
+  left: 0;
   pointer-events: none;
-  display: none;
   opacity: 0;
 }
 
-.ira-fade__image-wrap {
-  height: $ira-height;
-  width: $ira-width;
+.reveal__inner {
   overflow: hidden;
 }
 
-.ira-fade__image {
+.reveal__inner,
+.reveal__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-// unfold animation
-
-.ira-unfold {
-  margin-bottom: 30px;
-}
-
-.ira-unfold__holder {
-  height: $ira-height;
-  width: $ira-width;
-  position: fixed;
-  pointer-events: none;
-  display: none;
-  overflow: hidden;
-  width: 0;
-}
-
-.ira-unfold__image-wrap {
-  height: $ira-height;
-  width: $ira-width;
-}
-
-.ira-unfold__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;  
 }
