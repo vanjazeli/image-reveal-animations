@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
-$dark-grey: #ccc0c0;
-$light-grey: #282828;
+$primary: #2b81da;
+$secondary: #8B949E;
+$tertiary: #0D1117;
 
 * {
   margin: 0;
@@ -11,8 +12,8 @@ $light-grey: #282828;
 
 body {
   padding-top: 5vh;
-  font-family: 'Source Code Pro', monospace;
-  background-color: $light-grey;
+  font-family: 'Poppins', sans-serif;
+  background: $tertiary;
 }
 
 .content {
@@ -34,31 +35,32 @@ body {
 .content__heading {
   font-size: 30px;
   margin-bottom: 30px;
+  font-weight: 700;
   text-align: center;
-  color: $dark-grey;
+  color: $primary;
 }
 
 .content__links {
   display: flex;
   flex-direction: column;
 
-  > :not(:last-child){
-    margin-bottom: 10px;
+  > :not(:last-child) {
+    margin-bottom: 4px;
   }
 }
 
 .content__link {
   text-decoration: none;
-  color: $dark-grey;
+  color: $secondary;
   display: inline-block;
   padding-bottom: 6px;
-  background-image: linear-gradient($dark-grey 0 0);
+  background-image: linear-gradient($secondary 0 0);
   background-position: 0 100%;
   background-size: 0% 1px;
   background-repeat: no-repeat;
   transition:
-  background-size 0.2s,
-  background-position 0s 0.2s;
+  background-size 0.3s,
+  background-position 0s 0.3s;
 
   &:hover {
     background-position: 100% 100%;
@@ -70,17 +72,12 @@ body {
 
 .reveal {
   position: fixed;
-  width: 220px;
+  width: 200px;
   height: 150px;
   top: 0;
   left: 0;
   pointer-events: none;
-  overflow: hidden;
   display: none;
-}
-
-.reveal__inner {
-  overflow: hidden;
 }
 
 .reveal__inner,
