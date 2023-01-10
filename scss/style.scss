@@ -43,7 +43,7 @@ body {
   flex-direction: column;
 
   > :not(:last-child){
-    margin-bottom: 22px;
+    margin-bottom: 10px;
   }
 }
 
@@ -57,8 +57,8 @@ body {
   background-size: 0% 1px;
   background-repeat: no-repeat;
   transition:
-  background-size 0.3s,
-  background-position 0s 0.3s;
+  background-size 0.2s,
+  background-position 0s 0.2s;
 
   &:hover {
     background-position: 100% 100%;
@@ -75,7 +75,8 @@ body {
   top: 0;
   left: 0;
   pointer-events: none;
-  opacity: 0;
+  overflow: hidden;
+  display: none;
 }
 
 .reveal__inner {
@@ -86,5 +87,5 @@ body {
 .reveal__image {
   width: 100%;
   height: 100%;
-  position: relative;  
+  position: relative;
 }

@@ -1,7 +1,7 @@
 import "../scss/style.scss";
 import { gsap } from "gsap";
 
-class iraFade {
+class iraUnfold {
   constructor(element, imageUrl) {
     this.main = { element: element };
     this.main.reveal = document.createElement("div");
@@ -56,21 +56,61 @@ class iraFade {
     this.main.element.addEventListener("mouseleave", this.mouseLeave);
   }
   showImage() {
-    this.main.reveal.style.opacity = 1;
+    gsap.killTweensOf(this.main.inner);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline({
+        onStart: () => {
+          this.main.reveal.style.display = "block";
+        },
+      })
+      .add(
+        gsap.fromTo(
+          this.main.inner,
+          { x: "-100%" },
+          { x: "0%", duration: 0.2, ease: "power4.out" }
+        )
+      );
   }
   hideImage() {
-    this.main.reveal.style.opacity = 0;
+    gsap.killTweensOf(this.main.inner);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline({
+        onComplete: () => {
+          this.main.reveal.style.display = "none";
+          gsap.set(this.main.inner, { x: "" });
+          gsap.set(this.main.image, { x: "" });
+        },
+      })
+      .add("start")
+      .add(
+        gsap.to(this.main.inner, {
+          x: "100%",
+          duration: 0.2,
+          ease: "power4.out",
+        }),
+        "start"
+      )
+      .add(
+        gsap.to(this.main.image, {
+          x: "-100%",
+          duration: 0.2,
+          ease: "power4.out",
+        }),
+        "start"
+      );
   }
 }
 
-const fadeElements = document.querySelectorAll(".js-ira-fade");
-const fadeBackgorunds = [
-  "./images/1-1.png",
-  "./images/1-2.png",
-  "./images/1-3.png",
-  "./images/1-4.png",
+const unfoldElements = document.querySelectorAll(".js-ira-unfold");
+const unfoldBackgorunds = [
+  "./images/2-1.png",
+  "./images/2-2.png",
+  "./images/2-3.png",
+  "./images/2-4.png",
 ];
 
-fadeElements.forEach((fadeElement, fadeElementIndex) => {
-  new iraFade(fadeElement, fadeBackgorunds[fadeElementIndex]);
+unfoldElements.forEach((unfoldElement, unfoldElementIndex) => {
+  new iraUnfold(unfoldElement, unfoldBackgorunds[unfoldElementIndex]);
 });
