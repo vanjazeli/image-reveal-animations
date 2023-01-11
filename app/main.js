@@ -212,6 +212,7 @@ const unfoldBackgorunds = [
 unfoldElements.forEach((unfoldElement, unfoldElementIndex) => {
   new IraUnfold(unfoldElement, unfoldBackgorunds[unfoldElementIndex]);
 });
+
 // Slide animation
 
 class IraSlide {
@@ -274,27 +275,25 @@ class IraSlide {
     gsap.killTweensOf(this.main.reveal);
     gsap.killTweensOf(this.main.image);
     this.tl = gsap
-      .timeline({
-        onStart: () => {
-          this.main.reveal.style.display = "block";
-        },
-      })
+      .timeline()
       .add("start")
+      .add(gsap.set(this.main.reveal, { display: "block" }))
+      .add("animation")
       .add(
         gsap.fromTo(
           this.main.inner,
-          { x: -50, y: 200, rotate: 50 },
+          { x: 50, y: 200, rotate: 50 },
           { x: 0, y: 0, rotate: 0, duration: 0.3, ease: "power2.out" }
         ),
-        "start"
+        "animation"
       )
       .add(
         gsap.fromTo(
           this.main.image,
-          { x: 50, y: -200, rotate: -50 },
+          { x: -50, y: -200, rotate: -50 },
           { x: 0, y: 0, rotate: 0, duration: 0.3, ease: "power2.out" }
         ),
-        "start"
+        "animation"
       )
       .add(
         gsap.fromTo(
@@ -302,35 +301,29 @@ class IraSlide {
           { scale: 1.8 },
           { scale: 1, duration: 0.5 }
         ),
-        "start"
+        "animation"
       );
   }
   hideImage() {
     gsap.killTweensOf(this.main.reveal);
     gsap.killTweensOf(this.main.image);
     this.tl = gsap
-      .timeline({
-        onComplete: () => {
-          this.main.reveal.style.display = "none";
-          gsap.set(this.main.inner, { x: "", y: "", rotate: "" });
-          gsap.set(this.main.image, { x: "", y: "", rotate: "", scale: "" });
-        },
-      })
-      .add("end")
+      .timeline()
+      .add("animation")
       .add(
         gsap.fromTo(
           this.main.inner,
           { x: 0, y: 0, rotate: 0 },
-          { x: -80, y: -200, rotate: -30, duration: 0.3, ease: "power2.out" }
+          { x: 80, y: -200, rotate: -30, duration: 0.3, ease: "power2.out" }
         ),
-        "end"
+        "animation"
       )
       .add(
         gsap.fromTo(
           this.main.image,
           { x: 0, y: 0, rotate: 0, scale: 1 },
           {
-            x: 80,
+            x: -80,
             y: 200,
             rotate: 30,
             duration: 0.3,
@@ -338,6 +331,22 @@ class IraSlide {
             ease: "power2.out",
           }
         ),
+        "animation"
+      )
+      .add("end")
+      .add(gsap.set(this.main.reveal, { display: "none", delay: 0.3 }), "end")
+      .add(
+        gsap.set(this.main.inner, { x: "", y: "", rotate: "", delay: 0.3 }),
+        "end"
+      )
+      .add(
+        gsap.set(this.main.image, {
+          x: "",
+          y: "",
+          rotate: "",
+          scale: "",
+          delay: 0.3,
+        }),
         "end"
       );
   }
