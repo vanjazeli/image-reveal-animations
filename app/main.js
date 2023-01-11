@@ -212,7 +212,6 @@ const unfoldBackgorunds = [
 unfoldElements.forEach((unfoldElement, unfoldElementIndex) => {
   new IraUnfold(unfoldElement, unfoldBackgorunds[unfoldElementIndex]);
 });
-
 // Slide animation
 
 class IraSlide {
