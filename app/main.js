@@ -1,6 +1,80 @@
 import "../scss/style.scss";
 import { gsap } from "gsap";
 
+// Boring animation
+
+class IraBoring {
+  constructor(element, imageUrl) {
+    this.main = { element: element };
+    this.main.reveal = document.createElement("div");
+    this.main.reveal.className = "reveal";
+    this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
+    this.main.element.appendChild(this.main.reveal);
+    this.init();
+  }
+  init() {
+    this.events();
+  }
+  mousePosition(e) {
+    let posx = e.pageX;
+    let posy = e.pageY;
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY) {
+      posx = e.pageX;
+      posy = e.pageY;
+    } else if (e.clientX || e.clientY) {
+      posx =
+        e.clientX +
+        document.body.scrollLeft +
+        document.documentElement.scrollLeft;
+      posy =
+        e.clientY +
+        document.body.scrollTop +
+        document.documentElement.scrollTop;
+    }
+    return { x: posx, y: posy };
+  }
+  events() {
+    this.positionElement = (e) => {
+      const mousePosition = this.mousePosition(e);
+      this.main.reveal.style.top = mousePosition.y + 30 + "px";
+      this.main.reveal.style.left = mousePosition.x + 30 + "px";
+    };
+    this.mouseEnter = (e) => {
+      this.positionElement(e);
+      this.showImage();
+    };
+    this.mouseMove = (e) =>
+      requestAnimationFrame(() => {
+        this.positionElement(e);
+      });
+    this.mouseLeave = () => {
+      this.hideImage();
+    };
+    this.main.element.addEventListener("mouseenter", this.mouseEnter);
+    this.main.element.addEventListener("mousemove", this.mouseMove);
+    this.main.element.addEventListener("mouseleave", this.mouseLeave);
+  }
+  showImage() {
+    gsap.set(this.main.reveal, { display: "block" });
+  }
+  hideImage() {
+    gsap.set(this.main.reveal, { display: "none" });
+  }
+}
+
+const boringElements = document.querySelectorAll(".js-ira-boring");
+const boringImages = [
+  "./images/1-1.png",
+  "./images/1-2.png",
+  "./images/1-3.png",
+  "./images/1-4.png",
+];
+
+boringElements.forEach((boringElement, boringElementIndex) => {
+  new IraBoring(boringElement, boringImages[boringElementIndex]);
+});
+
 // Fade animation
 
 class IraFade {
@@ -85,10 +159,10 @@ class IraFade {
 
 const fadeElements = document.querySelectorAll(".js-ira-fade");
 const fadeImages = [
-  "./images/1-1.png",
-  "./images/1-2.png",
-  "./images/1-3.png",
-  "./images/1-4.png",
+  "./images/2-1.png",
+  "./images/2-2.png",
+  "./images/2-3.png",
+  "./images/2-4.png",
 ];
 
 fadeElements.forEach((fadeElement, fadeElementIndex) => {
@@ -203,10 +277,10 @@ class IraUnfold {
 
 const unfoldElements = document.querySelectorAll(".js-ira-unfold");
 const unfoldBackgorunds = [
-  "./images/2-1.png",
-  "./images/2-2.png",
-  "./images/2-3.png",
-  "./images/2-4.png",
+  "./images/3-1.png",
+  "./images/3-2.png",
+  "./images/3-3.png",
+  "./images/3-4.png",
 ];
 
 unfoldElements.forEach((unfoldElement, unfoldElementIndex) => {
@@ -282,7 +356,7 @@ class IraSlide {
       .add(
         gsap.fromTo(
           this.main.inner,
-          { x: 50, y: 200, rotate: 50 },
+          { x: 50, y: "100%", rotate: 50 },
           { x: 0, y: 0, rotate: 0, duration: 0.3, ease: "power2.out" }
         ),
         "animation"
@@ -290,7 +364,7 @@ class IraSlide {
       .add(
         gsap.fromTo(
           this.main.image,
-          { x: -50, y: -200, rotate: -50 },
+          { x: -50, y: "-100", rotate: -50 },
           { x: 0, y: 0, rotate: 0, duration: 0.3, ease: "power2.out" }
         ),
         "animation"
@@ -354,10 +428,10 @@ class IraSlide {
 
 const slideElements = document.querySelectorAll(".js-ira-slide");
 const slideBackgrounds = [
-  "./images/3-1.png",
-  "./images/3-2.png",
-  "./images/3-3.png",
-  "./images/3-4.png",
+  "./images/4-1.png",
+  "./images/4-2.png",
+  "./images/4-3.png",
+  "./images/4-4.png",
 ];
 
 slideElements.forEach((slideElement, slideElementIndex) => {
