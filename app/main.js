@@ -351,7 +351,7 @@ class IraSlide {
     this.tl = gsap
       .timeline()
       .add("start")
-      .add(gsap.set(this.main.reveal, { display: "block" }))
+      .add(gsap.set(this.main.reveal, { display: "block" }), "start")
       .add("animation")
       .add(
         gsap.fromTo(
@@ -436,4 +436,150 @@ const slideBackgrounds = [
 
 slideElements.forEach((slideElement, slideElementIndex) => {
   new IraSlide(slideElement, slideBackgrounds[slideElementIndex]);
+});
+
+// Corner animation
+
+class IraCorner {
+  constructor(element, imageUrl) {
+    this.main = { element: element };
+    this.main.reveal = document.createElement("div");
+    this.main.reveal.className = "reveal";
+    this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
+    this.main.reveal.style.overflow = "hidden";
+    this.main.element.appendChild(this.main.reveal);
+    this.main.inner = this.main.reveal.querySelector(".reveal__inner");
+    this.main.inner.style.overflow = "hidden";
+    this.main.image = this.main.reveal.querySelector(".reveal__image");
+    this.init();
+  }
+  init() {
+    this.events();
+  }
+  mousePosition(e) {
+    let posx = e.pageX;
+    let posy = e.pageY;
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY) {
+      posx = e.pageX;
+      posy = e.pageY;
+    } else if (e.clientX || e.clientY) {
+      posx =
+        e.clientX +
+        document.body.scrollLeft +
+        document.documentElement.scrollLeft;
+      posy =
+        e.clientY +
+        document.body.scrollTop +
+        document.documentElement.scrollTop;
+    }
+    return { x: posx, y: posy };
+  }
+  events() {
+    this.positionElement = (e) => {
+      const mousePosition = this.mousePosition(e);
+      this.main.reveal.style.top = mousePosition.y + 30 + "px";
+      this.main.reveal.style.left = mousePosition.x + 30 + "px";
+    };
+    this.mouseEnter = (e) => {
+      this.positionElement(e);
+      this.showImage();
+    };
+    this.mouseMove = (e) =>
+      requestAnimationFrame(() => {
+        this.positionElement(e);
+      });
+    this.mouseLeave = () => {
+      this.hideImage();
+    };
+    this.main.element.addEventListener("mouseenter", this.mouseEnter);
+    this.main.element.addEventListener("mousemove", this.mouseMove);
+    this.main.element.addEventListener("mouseleave", this.mouseLeave);
+  }
+  showImage() {
+    gsap.killTweensOf(this.main.reveal);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline()
+      .add("start")
+      .add(gsap.set(this.main.reveal, { display: "block" }), "start")
+      .add("animation")
+      .add(
+        gsap.fromTo(
+          this.main.inner,
+          { x: "100%", y: "-100%" },
+          { x: "0", y: "0", duration: 0.3, ease: "power2.out" }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(
+          this.main.image,
+          { x: "-100%", y: "100%" },
+          { x: "0", y: "0", duration: 0.3, ease: "power2.out" }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(
+          this.main.image,
+          { scale: 1.8 },
+          { scale: 1, duration: 0.5 }
+        ),
+        "animation"
+      );
+  }
+  hideImage() {
+    gsap.killTweensOf(this.main.reveal);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline()
+      .add("animation")
+      .add(
+        gsap.fromTo(
+          this.main.inner,
+          {
+            x: "0",
+            y: "0",
+          },
+          {
+            x: "-100%",
+            y: "100%",
+            duration: 0.3,
+            ease: "power2.out",
+          }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(
+          this.main.image,
+          { x: "0", y: "0" },
+          { x: "100%", y: "-100%", duration: 0.3, ease: "power2.out" }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(
+          this.main.image,
+          { scale: 1 },
+          { scale: 1.8, duration: 0.3 }
+        ),
+        "animation"
+      )
+      .add("end")
+      .add(gsap.set(this.main.reveal, { display: "none" }), "end");
+  }
+}
+
+const cornerElements = document.querySelectorAll(".js-ira-corner");
+const cornerBackgrounds = [
+  "./images/5-1.png",
+  "./images/5-2.png",
+  "./images/5-3.png",
+  "./images/5-4.png",
+];
+
+cornerElements.forEach((cornerElement, cornerElementIndex) => {
+  new IraCorner(cornerElement, cornerBackgrounds[cornerElementIndex]);
 });
