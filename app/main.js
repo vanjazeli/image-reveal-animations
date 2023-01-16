@@ -583,3 +583,154 @@ const cornerBackgrounds = [
 cornerElements.forEach((cornerElement, cornerElementIndex) => {
   new IraCorner(cornerElement, cornerBackgrounds[cornerElementIndex]);
 });
+
+// Spiral animation
+
+class IraSpiral {
+  constructor(element, imageUrl) {
+    this.main = { element: element };
+    this.main.reveal = document.createElement("div");
+    this.main.reveal.className = "reveal";
+    this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
+    this.main.reveal.style.overflow = "hidden";
+    this.main.element.appendChild(this.main.reveal);
+    this.main.inner = this.main.reveal.querySelector(".reveal__inner");
+    this.main.inner.style.overflow = "hidden";
+    this.main.image = this.main.reveal.querySelector(".reveal__image");
+    this.init();
+  }
+  init() {
+    this.events();
+  }
+  mousePosition(e) {
+    let posx = e.pageX;
+    let posy = e.pageY;
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY) {
+      posx = e.pageX;
+      posy = e.pageY;
+    } else if (e.clientX || e.clientY) {
+      posx =
+        e.clientX +
+        document.body.scrollLeft +
+        document.documentElement.scrollLeft;
+      posy =
+        e.clientY +
+        document.body.scrollTop +
+        document.documentElement.scrollTop;
+    }
+    return { x: posx, y: posy };
+  }
+  events() {
+    this.positionElement = (e) => {
+      const mousePosition = this.mousePosition(e);
+      this.main.reveal.style.top = mousePosition.y + 30 + "px";
+      this.main.reveal.style.left = mousePosition.x + 30 + "px";
+    };
+    this.mouseEnter = (e) => {
+      this.positionElement(e);
+      this.showImage();
+    };
+    this.mouseMove = (e) =>
+      requestAnimationFrame(() => {
+        this.positionElement(e);
+      });
+    this.mouseLeave = () => {
+      this.hideImage();
+    };
+    this.main.element.addEventListener("mouseenter", this.mouseEnter);
+    this.main.element.addEventListener("mousemove", this.mouseMove);
+    this.main.element.addEventListener("mouseleave", this.mouseLeave);
+  }
+  showImage() {
+    gsap.killTweensOf(this.main.reveal);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline()
+      .add("start")
+      .add(
+        gsap.set(this.main.reveal, { display: "block", zIndex: 10000 }),
+        "start"
+      )
+      .add("animation")
+      .add(
+        gsap.fromTo(
+          this.main.inner,
+          { rotate: -90 },
+          { rotate: 0, duration: 0.3, ease: "power2.out" }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(this.main.inner, { scale: 0 }, { scale: 1, duration: 0.3 }),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(
+          this.main.image,
+          { rotate: 90 },
+          { rotate: 0, duration: 0.3, ease: "power2.out" }
+        ),
+        "animation"
+      )
+      .add(
+        gsap.fromTo(this.main.image, { scale: 2 }, { scale: 1, duration: 0.5 }),
+        "animation"
+      );
+  }
+  hideImage() {
+    gsap.killTweensOf(this.main.reveal);
+    gsap.killTweensOf(this.main.image);
+    this.tl = gsap
+      .timeline()
+      .add("start")
+      .add(gsap.set(this.main.reveal, { zIndex: 9999 }), "start")
+      .add("animation")
+      .add(
+        gsap.to(this.main.inner, {
+          rotate: -90,
+          duration: 0.3,
+          ease: "power2.out",
+        }),
+        "animation"
+      )
+      .add(gsap.to(this.main.inner, { scale: 0, duration: 0.3 }), "animation")
+      .add(
+        gsap.to(this.main.image, {
+          rotate: 90,
+          duration: 0.3,
+          ease: "power2.out",
+        }),
+        "animation"
+      )
+      .add(
+        gsap.to(this.main.image, {
+          scale: 2,
+          duration: 0.3,
+        }),
+        "animation"
+      )
+      .add("end")
+      .add(
+        gsap.set(this.main.reveal, {
+          display: "none",
+          top: "",
+          left: "",
+          zIndex: "",
+        }),
+        "end"
+      );
+  }
+}
+
+const spiralElements = document.querySelectorAll(".js-ira-spiral");
+const spiralBackgrounds = [
+  "./images/6-1.png",
+  "./images/6-2.png",
+  "./images/6-3.png",
+  "./images/6-4.png",
+];
+
+spiralElements.forEach((spiralElement, spiralElementIndex) => {
+  new IraSpiral(spiralElement, spiralBackgrounds[spiralElementIndex]);
+});
