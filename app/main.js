@@ -83,6 +83,7 @@ class IraFade {
     this.main = { element: element };
     this.main.reveal = document.createElement("div");
     this.main.reveal.className = "reveal";
+    this.main.style.display = "none";
     this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
     this.main.element.appendChild(this.main.reveal);
     this.init();
