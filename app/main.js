@@ -8,6 +8,7 @@ class IraBoring {
     this.main = { element: element };
     this.main.reveal = document.createElement("div");
     this.main.reveal.className = "reveal";
+    this.main.reveal.style.display = "none";
     this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
     this.main.element.appendChild(this.main.reveal);
     this.init();
@@ -178,6 +179,7 @@ class IraUnfold {
     this.main.reveal.className = "reveal";
     this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
     this.main.reveal.style.overflow = "hidden";
+    this.main.reveal.style.display = "none";
     this.main.element.appendChild(this.main.reveal);
     this.main.inner = this.main.reveal.querySelector(".reveal__inner");
     this.main.inner.style.overflow = "hidden";
@@ -296,6 +298,7 @@ class IraSlide {
     this.main.reveal.className = "reveal";
     this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
     this.main.reveal.style.overflow = "hidden";
+    this.main.reveal.style.display = "none";
     this.main.element.appendChild(this.main.reveal);
     this.main.inner = this.main.reveal.querySelector(".reveal__inner");
     this.main.inner.style.overflow = "hidden";
@@ -447,6 +450,7 @@ class IraCorner {
     this.main.reveal.className = "reveal";
     this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
     this.main.reveal.style.overflow = "hidden";
+    this.main.reveal.style.display = "none";
     this.main.element.appendChild(this.main.reveal);
     this.main.inner = this.main.reveal.querySelector(".reveal__inner");
     this.main.inner.style.overflow = "hidden";
@@ -593,6 +597,7 @@ class IraSpiral {
     this.main.reveal.className = "reveal";
     this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
     this.main.reveal.style.overflow = "hidden";
+    this.main.reveal.style.display = "none";
     this.main.element.appendChild(this.main.reveal);
     this.main.inner = this.main.reveal.querySelector(".reveal__inner");
     this.main.inner.style.overflow = "hidden";
