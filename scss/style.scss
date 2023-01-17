@@ -15,26 +15,26 @@ body {
   background: $tertiary;
 }
 
-// .nav {
-//   padding: 20px;
-//   max-width: 800px;
-//   margin: 0 auto 60px;
-// }
+.nav {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
 
-// .nav__main {
-//   font-size: 16px;
-//   line-height: 20px;
-//   color: $primary;
-//   font-weight: 700;
-//   text-decoration: none;
-// }
+.nav__main {
+  font-size: 16px;
+  line-height: 20px;
+  color: $primary;
+  font-weight: 700;
+  text-decoration: none;
+}
 
-// .hover-default {
-//   transition: 0.3s ease-in-out opacity;
-//   &:hover {
-//     opacity: 0.7;
-//   }
-// }
+.hover-default {
+  transition: 0.3s ease-in-out opacity;
+  &:hover {
+    opacity: 0.7;
+  }
+}
 
 .content {
   max-width: 600px;

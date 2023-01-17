@@ -63,50 +63,56 @@ class Ira {
         this.main.inner.style.overflow = "hidden";
         this.main.image = this.main.reveal.querySelector(".reveal__image");
         this.showImage = () => {
+          gsap.killTweensOf(this.main.reveal);
           gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
-            .timeline({
-              onStart: () => {
-                this.main.reveal.style.display = "block";
-              },
-            })
+            .timeline()
+            .add("start")
+            .add(gsap.set(this.main.reveal, { display: "block" }), "start")
+            .add("animation")
             .add(
               gsap.fromTo(
                 this.main.inner,
                 { x: "-100%" },
-                { x: "0%", duration: 0.3, ease: "power4.out" }
-              )
+                { x: "0", duration: 0.3, ease: "power2.out" }
+              ),
+              "animation"
+            )
+            .add(
+              gsap.fromTo(
+                this.main.image,
+                { x: "100%" },
+                { x: "0", duration: 0.3, ease: "power2.out" }
+              ),
+              "animation"
             );
         };
         this.hideImage = () => {
+          gsap.killTweensOf(this.main.reveal);
           gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
-            .timeline({
-              onComplete: () => {
-                this.main.reveal.style.display = "none";
-                gsap.set(this.main.inner, { x: "" });
-                gsap.set(this.main.image, { x: "" });
-              },
-            })
-            .add("start")
+            .timeline()
+            .add("animation")
             .add(
               gsap.to(this.main.inner, {
                 x: "100%",
                 duration: 0.3,
-                ease: "power4.out",
+                ease: "power2.out",
               }),
-              "start"
+              "animation"
             )
             .add(
               gsap.to(this.main.image, {
                 x: "-100%",
                 duration: 0.3,
-                ease: "power4.out",
+                ease: "power2.out",
               }),
-              "start"
-            );
+              "animation"
+            )
+            .add("end")
+            .add(gsap.set(this.main.reveal, { display: "none" }), "end");
         };
         break;
       case "slide":
