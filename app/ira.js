@@ -128,6 +128,7 @@ class Ira {
         this.main.image = this.main.reveal.querySelector(".reveal__image");
         this.showImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
@@ -161,63 +162,34 @@ class Ira {
         };
         this.hideImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
             .add("animation")
             .add(
-              gsap.fromTo(
-                this.main.inner,
-                { x: 0, y: 0, rotate: 0 },
-                {
-                  x: 80,
-                  y: -200,
-                  rotate: -30,
-                  duration: 0.3,
-                  ease: "power2.out",
-                }
-              ),
+              gsap.to(this.main.inner, {
+                x: 80,
+                y: -200,
+                rotate: -30,
+                duration: 0.3,
+                ease: "power2.out",
+              }),
               "animation"
             )
             .add(
-              gsap.fromTo(
-                this.main.image,
-                { x: 0, y: 0, rotate: 0, scale: 1 },
-                {
-                  x: -80,
-                  y: 200,
-                  rotate: 30,
-                  duration: 0.3,
-                  scale: 2,
-                  ease: "power2.out",
-                }
-              ),
+              gsap.to(this.main.image, {
+                x: -80,
+                y: 200,
+                rotate: 30,
+                duration: 0.3,
+                scale: 2,
+                ease: "power2.out",
+              }),
               "animation"
             )
             .add("end")
-            .add(
-              gsap.set(this.main.reveal, { display: "none", delay: 0.3 }),
-              "end"
-            )
-            .add(
-              gsap.set(this.main.inner, {
-                x: "",
-                y: "",
-                rotate: "",
-                delay: 0.3,
-              }),
-              "end"
-            )
-            .add(
-              gsap.set(this.main.image, {
-                x: "",
-                y: "",
-                rotate: "",
-                scale: "",
-                delay: 0.3,
-              }),
-              "end"
-            );
+            .add(gsap.set(this.main.reveal, { display: "none" }), "end");
         };
         break;
       case "corner":
@@ -233,6 +205,7 @@ class Ira {
         this.main.image = this.main.reveal.querySelector(".reveal__image");
         this.showImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
@@ -266,40 +239,31 @@ class Ira {
         };
         this.hideImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
             .add("animation")
             .add(
-              gsap.fromTo(
-                this.main.inner,
-                {
-                  x: "0",
-                  y: "0",
-                },
-                {
-                  x: "-100%",
-                  y: "100%",
-                  duration: 0.3,
-                  ease: "power2.out",
-                }
-              ),
+              gsap.to(this.main.inner, {
+                x: "-100%",
+                y: "100%",
+                duration: 0.3,
+                ease: "power2.out",
+              }),
               "animation"
             )
             .add(
-              gsap.fromTo(
-                this.main.image,
-                { x: "0", y: "0" },
-                { x: "100%", y: "-100%", duration: 0.3, ease: "power2.out" }
-              ),
+              gsap.to(this.main.image, {
+                x: "100%",
+                y: "-100%",
+                duration: 0.3,
+                ease: "power2.out",
+              }),
               "animation"
             )
             .add(
-              gsap.fromTo(
-                this.main.image,
-                { scale: 1 },
-                { scale: 1.8, duration: 0.3 }
-              ),
+              gsap.to(this.main.image, { scale: 1.8, duration: 0.3 }),
               "animation"
             )
             .add("end")
@@ -319,6 +283,7 @@ class Ira {
         this.main.image = this.main.reveal.querySelector(".reveal__image");
         this.showImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
@@ -363,6 +328,7 @@ class Ira {
         };
         this.hideImage = () => {
           gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
           gsap.killTweensOf(this.main.image);
           this.tl = gsap
             .timeline()
@@ -400,8 +366,6 @@ class Ira {
             .add(
               gsap.set(this.main.reveal, {
                 display: "none",
-                top: "",
-                left: "",
                 zIndex: "",
               }),
               "end"
