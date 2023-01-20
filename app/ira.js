@@ -11,9 +11,11 @@ class Ira {
         this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
         this.main.element.appendChild(this.main.reveal);
         this.showImage = () => {
+          gsap.killTweensOf(this.main.reveal);
           gsap.set(this.main.reveal, { display: "block" });
         };
         this.hideImage = () => {
+          gsap.killTweensOf(this.main.reveal);
           gsap.set(this.main.reveal, { display: "none" });
         };
         break;
@@ -372,6 +374,34 @@ class Ira {
             );
         };
         break;
+      case "skew":
+        this.main = { element: element };
+        this.main.reveal = document.createElement("div");
+        this.main.reveal.className = "reveal";
+        this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
+        this.main.reveal.style.overflow = "hidden";
+        this.main.reveal.style.display = "none";
+        this.main.element.appendChild(this.main.reveal);
+        this.main.inner = this.main.reveal.querySelector(".reveal__inner");
+        this.main.inner.style.overflow = "hidden";
+        this.main.image = this.main.reveal.querySelector(".reveal__image");
+        this.showImage = () => {
+          gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
+          gsap.killTweensOf(this.main.image);
+          this.tl = gsap
+            .timeline()
+            .add("start")
+            .add(gsap.set(this.main.reveal, { display: block }), "start")
+            .add("animation")
+            .add(gsap.fromTo(this.main.inner, {}));
+        };
+        this.hideImage = () => {
+          gsap.killTweensOf(this.main.reveal);
+          gsap.killTweensOf(this.main.inner);
+          gsap.killTweensOf(this.main.image);
+        };
+        break;
       default:
         console.error(`AnimationType of "${animationType}" NOT FOUND!`);
         break;
@@ -400,9 +430,13 @@ class Ira {
     this.mouseLeave = () => {
       this.hideImage();
     };
+    this.scroll = () => {
+      this.hideImage();
+    };
     this.main.element.addEventListener("mouseenter", this.mouseEnter);
     this.main.element.addEventListener("mousemove", this.mouseMove);
     this.main.element.addEventListener("mouseleave", this.mouseLeave);
+    window.addEventListener("scroll", this.scroll);
   }
 }
 
