@@ -75,12 +75,12 @@ spiralElements.forEach((spiralElement, spiralElementIndex) => {
 
 // const skewElements = document.querySelectorAll(".js-ira-skew");
 // const skewBackgrounds = [
-//   "./iamges/7-1.png",
-//   "./iamges/7-2.png",
-//   "./iamges/7-3.png",
-//   "./iamges/7-4.png",
+//   "./images/7-1.png",
+//   "./images/7-2.png",
+//   "./images/7-3.png",
+//   "./images/7-4.png",
 // ];
 
 // newElements.forEach((skewElement, skewElementIndex) => {
-//   new Ira(skewElem)
-// })
+//   new Ira(skewElem);
+// });
