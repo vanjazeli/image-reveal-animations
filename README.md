@@ -10,9 +10,10 @@ Check out the demo of this project right [here](https://vanjazeli.github.io/imag
 
 ### Initialization
 
-Make sure to install GSAP library into your current project.
-Import the Ira class from ira.js file into the file where you would like to initialize an animation.
-Initialize an animation by passing in the element, imageUrl and animationType into the Ira class with `new Ira(element, imageUrl, animationType)`.
+ - Make sure to install GSAP library into your current project.
+ - Add ira.js file from this repo to your project.
+ - Import the Ira class from ira.js file into the file where you would like to initialize an animation.
+ - Initialize an animation by passing the element, imageUrl and animationType into the Ira class with `new Ira(element, imageUrl, animationType)`.
 
 ```JavaScript
 import Ira from "./ira.js";
