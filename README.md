@@ -20,15 +20,15 @@ const animationType = "slide"
 
 new Ira(element, imageUrl, animationType);
 ```
-<br/>
-The `Ira(element, imageUrl, animationType)` class takes in three arguements: element, imageUrl and animationType.
-<br/>
+
+The `Ira(element, imageUrl, animationType)` class takes in three arguements: element, imageUrl and animationType. <br/>
+
 | Arguement | Type | Description |
 |:----------|:-----|:------------|
 | `element` | object | Defines an object from the dom to which we would like to add the desired hover animation. |
 | `imageUrl` | string | Defines a path to the image that we would like to display when the desired element gets hovered. |
 | `animationType` | string | Defines the name of the animation that we would like to use. |
-<br/>
+
 Currently available animation names are: `"boring"`, `"fade"`, `"unfold"`, `"slide"`, `"corner"` and `"spiral"`. 
 
 ## Credits
