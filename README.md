@@ -34,7 +34,13 @@ The `Ira(element, imageUrl, animationType)` class takes in three arguements: ele
 | `imageUrl` | string | Defines a path to the image that we would like to display when the desired element gets hovered. |
 | `animationType` | string | Defines the name of the animation that we would like to use. |
 
-Currently available animation names are: `"boring"`, `"fade"`, `"unfold"`, `"slide"`, `"corner"` and `"spiral"`. 
+Animation types that are currently available: 
+ - `"boring"`
+ - `"fade"`
+ - `"unfold"`
+ - `"slide"`
+ - `"corner"`
+ - `"spiral"`
 
 ## Credits
  - [DALL·E 2](https://openai.com/dall-e-2/) Images
