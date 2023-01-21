@@ -22,7 +22,7 @@ new Ira(element, imageUrl, animationType);
 ```
 
 The `Ira(element, imageUrl, animationType)` class takes in three arguements: element, imageUrl and animationType.
-\
+
 | Arguement | Type | Description |
 |:----------|:-----|:------------|
 | `element` | object | Defines an object from the dom to which we would like to add the desired hover animation. |
