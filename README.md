@@ -7,6 +7,9 @@ Check out the demo of this project right [here](https://vanjazeli.github.io/imag
 
 
 ## Usage
+
+### Initialization
+
 Make sure to install GSAP library into your current project.
 Import the Ira class from ira.js file into the file where you would like to initialize an animation.
 Initialize an animation by passing in the element, imageUrl and animationType into the Ira class with `new Ira(element, imageUrl, animationType)`.
@@ -20,6 +23,8 @@ const animationType = "slide"
 
 new Ira(element, imageUrl, animationType);
 ```
+
+### Arguements
 
 The `Ira(element, imageUrl, animationType)` class takes in three arguements: element, imageUrl and animationType.
 
