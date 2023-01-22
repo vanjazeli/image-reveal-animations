@@ -43,9 +43,8 @@ Animation types that are currently available:
  - `"spiral"`
 
 ## Credits
- - [DALL·E 2](https://openai.com/dall-e-2/) Images
- - [Cordrops](https://github.com/codrops) Idea
-
+ - [DALL·E 2](https://openai.com/dall-e-2/)
+ - [Cordrops](https://github.com/codrops)
 
 ## Licence
-Absolutely free for all types of commercial or personal projects.
+Completely  free for use in all types of commercial or personal projects. Mentions with a reference to my github profile are required when uploading or reposting any of original or modified code from this project.
