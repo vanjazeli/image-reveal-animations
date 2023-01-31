@@ -47,4 +47,4 @@ Animation types that are currently available:
  - [Cordrops](https://github.com/codrops)
 
 ## Licence
-Completely  free for use in all types of commercial or personal projects. Mentions with a reference to my github profile are required when uploading or reposting any of original or modified code from this project.
+Completely  free for use in all types of commercial or personal projects. Mentions are required when uploading or reposting any of original or modified code from this project.
