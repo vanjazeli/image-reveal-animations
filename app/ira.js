@@ -7,50 +7,50 @@ class Ira {
         this.main = { element: element };
         this.main.reveal = document.createElement("div");
         this.main.reveal.className = "reveal";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.style.visibility = "hidden";
         this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
         this.main.element.appendChild(this.main.reveal);
         this.showImage = () => {
           gsap.killTweensOf(this.main.reveal);
-          gsap.set(this.main.reveal, { display: "block" });
+          gsap.set(this.main.reveal, { visibility: "visible" });
         };
         this.hideImage = () => {
           gsap.killTweensOf(this.main.reveal);
-          gsap.set(this.main.reveal, { display: "none" });
+          gsap.set(this.main.reveal, { visibility: "hidden" });
         };
         break;
       case "fade":
         this.main = { element: element };
         this.main.reveal = document.createElement("div");
         this.main.reveal.className = "reveal";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.visibility = "hidden";
+        this.main.reveal.style.opacity = "0";
         this.main.reveal.innerHTML = `<div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div>`;
         this.main.element.appendChild(this.main.reveal);
         this.showImage = () => {
           gsap.killTweensOf(this.main.reveal);
           this.tl = gsap
-            .timeline({
-              onStart: () => {
-                this.main.reveal.style.display = "block";
-              },
-            })
+            .timeline()
+            .add("start")
+            .add(gsap.set(this.main.reveal, { visibility: "visible" }), "start")
+            .add("animation")
             .add(
               gsap.fromTo(
                 this.main.reveal,
                 { opacity: 0 },
                 { opacity: 1, duration: 0.3, ease: "power1.out" }
-              )
+              ),
+              "animation"
             );
         };
         this.hideImage = () => {
           gsap.killTweensOf(this.main.reveal);
-          this.tl = gsap.timeline(
-            gsap.to(this.main.reveal, {
-              opacity: 0,
-              duration: 0.3,
-              ease: "power1.out",
-            })
-          );
+          this.tl = gsap
+            .timeline()
+            .add("animation")
+            .add(gsap.to(this.main.reveal, { opacity: "0" }), "animation")
+            .add("end")
+            .add(gsap.set(this.main.reveal, { visibility: "hidden" }), "end");
         };
         break;
       case "unfold":
@@ -59,7 +59,7 @@ class Ira {
         this.main.reveal.className = "reveal";
         this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
         this.main.reveal.style.overflow = "hidden";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.style.visibility = "hidden";
         this.main.element.appendChild(this.main.reveal);
         this.main.inner = this.main.reveal.querySelector(".reveal__inner");
         this.main.inner.style.overflow = "hidden";
@@ -71,7 +71,7 @@ class Ira {
           this.tl = gsap
             .timeline()
             .add("start")
-            .add(gsap.set(this.main.reveal, { display: "block" }), "start")
+            .add(gsap.set(this.main.reveal, { visibility: "visible" }), "start")
             .add("animation")
             .add(
               gsap.fromTo(
@@ -114,7 +114,7 @@ class Ira {
               "animation"
             )
             .add("end")
-            .add(gsap.set(this.main.reveal, { display: "none" }), "end");
+            .add(gsap.set(this.main.reveal, { visibility: "hidden" }), "end");
         };
         break;
       case "slide":
@@ -123,7 +123,7 @@ class Ira {
         this.main.reveal.className = "reveal";
         this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
         this.main.reveal.style.overflow = "hidden";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.style.visibility = "hidden";
         this.main.element.appendChild(this.main.reveal);
         this.main.inner = this.main.reveal.querySelector(".reveal__inner");
         this.main.inner.style.overflow = "hidden";
@@ -135,7 +135,7 @@ class Ira {
           this.tl = gsap
             .timeline()
             .add("start")
-            .add(gsap.set(this.main.reveal, { display: "block" }), "start")
+            .add(gsap.set(this.main.reveal, { visibility: "visible" }), "start")
             .add("animation")
             .add(
               gsap.fromTo(
@@ -191,7 +191,7 @@ class Ira {
               "animation"
             )
             .add("end")
-            .add(gsap.set(this.main.reveal, { display: "none" }), "end");
+            .add(gsap.set(this.main.reveal, { visibility: "hidden" }), "end");
         };
         break;
       case "corner":
@@ -200,7 +200,7 @@ class Ira {
         this.main.reveal.className = "reveal";
         this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
         this.main.reveal.style.overflow = "hidden";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.style.visibility = "hidden";
         this.main.element.appendChild(this.main.reveal);
         this.main.inner = this.main.reveal.querySelector(".reveal__inner");
         this.main.inner.style.overflow = "hidden";
@@ -212,7 +212,7 @@ class Ira {
           this.tl = gsap
             .timeline()
             .add("start")
-            .add(gsap.set(this.main.reveal, { display: "block" }), "start")
+            .add(gsap.set(this.main.reveal, { visibility: "visible" }), "start")
             .add("animation")
             .add(
               gsap.fromTo(
@@ -269,7 +269,7 @@ class Ira {
               "animation"
             )
             .add("end")
-            .add(gsap.set(this.main.reveal, { display: "none" }), "end");
+            .add(gsap.set(this.main.reveal, { visibility: "hidden" }), "end");
         };
         break;
       case "spiral":
@@ -278,7 +278,7 @@ class Ira {
         this.main.reveal.className = "reveal";
         this.main.reveal.innerHTML = `<div class="reveal__inner"><div class="reveal__image" style="background: url('${imageUrl}') no-repeat center center / cover"></div></div>`;
         this.main.reveal.style.overflow = "hidden";
-        this.main.reveal.style.display = "none";
+        this.main.reveal.style.visibility = "hidden";
         this.main.element.appendChild(this.main.reveal);
         this.main.inner = this.main.reveal.querySelector(".reveal__inner");
         this.main.inner.style.overflow = "hidden";
@@ -291,7 +291,10 @@ class Ira {
             .timeline()
             .add("start")
             .add(
-              gsap.set(this.main.reveal, { display: "block", zIndex: 10000 }),
+              gsap.set(this.main.reveal, {
+                visibility: "visible",
+                zIndex: 10000,
+              }),
               "start"
             )
             .add("animation")
@@ -367,7 +370,7 @@ class Ira {
             .add("end")
             .add(
               gsap.set(this.main.reveal, {
-                display: "none",
+                visibility: "hidden",
                 zIndex: "",
               }),
               "end"
