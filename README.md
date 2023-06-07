@@ -1,5 +1,5 @@
 # Image Reveal Animations
-A small and simple JavaScript library which uses GSAP to create some image reveal animations that trigger on HTML element hover.
+A JavaScript library which uses GSAP to create some image reveal animations that trigger on HTML element hover.
 
 
 ## Demo
